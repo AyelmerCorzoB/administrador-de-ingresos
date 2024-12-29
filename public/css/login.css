@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(315deg, #4b0081 3%, #d7bfd7 38%,#e39ff6  68%,#4b0081  98%);
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.olas {
+    background: #4b0081;
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 15em;
+    animation: olas 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.olas:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: olas 18s linear reverse infinite;
+    opacity: 0.8;
+}
+
+.olas:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: olas 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+
+@keyframes olas {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+
+form {
+    background-image: url(../storage/images/bg.png);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px;
+    width: 420px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    
+
+}
+
+
+form img {
+    width: 70px;
+    margin-bottom: 10px;
+    
+}
+
+.input-container{
+    position: relative;
+}
+.input-container label {
+    font-size: 16px;
+    color: #00ff9d;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-container select, 
+.input-container input {
+    padding: 15px 40px 15px 15px;
+    width: 100%;
+    border-radius: 35px;
+    background-color: transparent;
+    border: 2px solid #c48afb;
+    font-size: 16px;
+    outline: none;
+    color: #fcf3fc;
+    margin-bottom: 1.8rem;
+}
+.input-container select option {
+    color: white;
+    font-size: 16px;
+    padding: 5px;
+
+}
+
+.input-container select {
+    background-color: #7d36ff;
+    color: #fff;
+}
+
+.input-container:hover{
+    transform: scale(1.01);
+}
+.input-container > i {
+    padding: 14px;
+    border-radius: 50%;
+    background-color: #6D2FE3;
+    color: #fcf3fc;
+    position: absolute;
+    font-size: 20px;
+    top: 7px;
+    right: 8px;
+}
+
+.input-container > input {
+    padding: 20px 50px 20px 15px;
+    width: 100%;
+    margin-bottom: 25px;
+    border-radius: 35px;
+    background-color: transparent;
+    border: 2px solid #c48afb;
+    font-size: 16px;
+    outline: none;
+    color: #fcf3fc;
+}
+
+::placeholder{
+    color: #ffefff8d;
+    font-size: 16px;
+}
+
+form a {
+    display: block;
+    color: #fcf3fc;
+    font-size: 15px;
+    text-decoration: none;
+    margin-bottom: 25px;
+}
+
+form .btn {
+    background-color: #7d36ff;
+    padding: 14px 45px;
+    border: none;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    color: #fcf3fc;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.success {
+    position: absolute;
+    top: 20px;
+    color: #fcf3fc;
+    font-size: 20px;
+}
+
+.error {
+    position: absolute;
+    top: 20px;
+    color: red;
+    font-size: 20px;
+}
+
+@media (max-width:991px) {
+    body {
+        padding: 30px;
+    }
+
+    form {
+        width:80%;
+    }
+}
