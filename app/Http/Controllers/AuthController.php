@@ -24,7 +24,7 @@ class AuthController extends Controller
             'fecha' => now(),
         ]);
 
-        return redirect('/login')->with('success', 'Registro exitoso');
+        return redirect('/')->with('success', 'Registro exitoso');
     }
 
     // Inicio de sesión
@@ -44,8 +44,8 @@ class AuthController extends Controller
             ]);
 
             return match ($usuario->rol) {
-                'admin' => redirect('/'),
-                'almuerzos' => redirect('/almuerzos'),
+                'admin' => redirect('/admin'),
+                'almuerzos' => redirect('/clientesalmuerzos'),
                 'xbox' => redirect('/xbox'),
                 default => redirect('/home'),
             };

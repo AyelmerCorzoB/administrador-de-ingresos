@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class OrdenAlmuerzoController extends Controller
 {
-    public function index()
+    public function orden()
     {
         $ordenesAlmuerzos = OrdenAlmuerzo::with('clienteAlmuerzo')->get();
-        return view('almuerzos.ordenesalmuerzos.index', compact('ordenesAlmuerzos'));
+        return view('almuerzos.ordenesalmuerzos.orden', compact('ordenesAlmuerzos'));
     }
 
-    public function create()
+    public function orden_create()
     {
         $clientesAlmuerzos = ClienteAlmuerzo::all();
-        return view('almuerzos.ordenesalmuerzos.create', compact('clientesAlmuerzos'));
+        return view('almuerzos.ordenesalmuerzos.orden_create', compact('clientesAlmuerzos'));
     }
 
     public function store(Request $request)
@@ -35,13 +35,13 @@ class OrdenAlmuerzoController extends Controller
             'situacion_pago' => $request->has('situacion_pago') ? 'Pagado' : 'Pendiente',
         ]));
 
-        return redirect()->route('ordenesalmuerzos.index')->with('success', 'Orden agregada exitosamente.');
+        return redirect()->route('ordenesalmuerzos.orden')->with('success', 'Orden agregada exitosamente.');
     }
 
     public function destroy($id)
     {
         $orden = OrdenAlmuerzo::findOrFail($id);
         $orden->delete();
-        return redirect()->route('ordenesalmuerzos.index')->with('success', 'Orden eliminada exitosamente.');
+        return redirect()->route('ordenesalmuerzos.orden')->with('success', 'Orden eliminada exitosamente.');
     }
 }

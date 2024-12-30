@@ -4,7 +4,7 @@
 
 @section('content')
     <h2>Órdenes de Almuerzos</h2>
-    <a href="{{ route('ordenesalmuerzos.create') }}">Agregar Orden</a>
+    <a href="{{ route('ordenesalmuerzos.orden_create') }}">Agregar Orden</a>
 
     @if(session('success'))
         <div>

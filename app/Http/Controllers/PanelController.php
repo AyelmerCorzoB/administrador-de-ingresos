@@ -11,14 +11,14 @@ use Illuminate\Http\Request;
 
 class PanelController
 {
-    public function dashboard()
+    public function admin()
     {
         $totalClientes = Cliente::count();
         $totalOrdenes = Orden::count();
         $totalIngresos = Orden::where('situacion_pago', 'pagado')->sum('total');
         $totalPendiente = Orden::where('situacion_pago', 'pendiente')->sum('total');
 
-        return view('panel.dashboard', compact('totalClientes', 'totalOrdenes', 'totalIngresos', 'totalPendiente'));
+        return view('panel.admin', compact('totalClientes', 'totalOrdenes', 'totalIngresos', 'totalPendiente'));
     }
 
     public function ordenes()

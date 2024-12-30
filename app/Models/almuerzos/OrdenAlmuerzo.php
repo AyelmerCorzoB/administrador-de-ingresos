@@ -11,6 +11,7 @@ class OrdenAlmuerzo extends Model
 
     protected $table = 'ordenes'; // Nombre de la tabla
     protected $primaryKey = 'id_orden'; // Clave primaria
+    public $timestamps = false; // Desactiva las marcas de tiempo automáticas
 
     protected $fillable = ['id_cliente', 'detalle', 'total', 'ubicacion', 'fecha_orden', 'situacion_pago'];
 
