@@ -10,7 +10,7 @@
     </tr>
     @foreach($pagos as $pago)
     <tr>
-        <td>{{ $pago->cliente->nombre }}</td>
+        <td>{{ $pago->clientes->nombre }}</td>
         <td>${{ number_format($pago->monto, 2) }}</td>
         <td>{{ $pago->fecha_pago }}</td>
     </tr>

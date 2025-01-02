@@ -1,9 +1,10 @@
 <?php 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PanelController;
-use App\Http\Controllers\ClienteAlmuerzoController;
 use App\Http\Controllers\OrdenAlmuerzoController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClienteAlmuerzoController;
+use App\Http\Controllers\MensualAlmuerzoController;
 
 // Rutas para autenticación
 Route::get('/', function () {
@@ -36,8 +37,14 @@ Route::get('/clientesalmuerzos/create', [ClienteAlmuerzoController::class, 'crea
 Route::post('/clientesalmuerzos', [ClienteAlmuerzoController::class, 'store'])->name('clientesalmuerzos.store');
 Route::delete('/clientesalmuerzos/{id}', [ClienteAlmuerzoController::class, 'destroy'])->name('clientesalmuerzos.destroy');
 
+//Rutas Mensual
+Route::get('/mensualalmuerzos', [MensualAlmuerzoController::class, 'index'])->name('mensualalmuerzos.index');
+
 // Rutas para Órdenes de Almuerzos
 Route::get('/ordenesalmuerzos/index', [OrdenAlmuerzoController::class, 'orden'])->name('ordenesalmuerzos.orden');
 Route::get('/ordenesalmuerzos/create', [OrdenAlmuerzoController::class, 'orden_create'])->name('ordenesalmuerzos.orden_create');
 Route::post('/ordenesalmuerzos', [OrdenAlmuerzoController::class, 'store'])->name('ordenesalmuerzos.store');
 Route::delete('/ordenesalmuerzos/{id}', [OrdenAlmuerzoController::class, 'destroy'])->name('ordenesalmuerzos.destroy');
+Route::get('ordenesalmuerzos/{id_orden}/edit', [OrdenAlmuerzoController::class, 'edit'])->name('ordenesalmuerzos.orden_edit');
+Route::put('ordenesalmuerzos/{id_orden}', [OrdenAlmuerzoController::class, 'update'])->name('ordenesalmuerzos.update');
+Route::put('/ordenesalmuerzos/{id_orden}/update-status', [OrdenAlmuerzoController::class, 'updateStatus'])->name('ordenesalmuerzos.updateStatus');

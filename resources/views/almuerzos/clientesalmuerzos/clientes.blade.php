@@ -3,16 +3,18 @@
 @section('title', 'El Sabor De Casa')
 
 @section('content')
-    
-    <h2>Clientes de Almuerzos</h2>
 
-    @if(session('success'))
+    
+    <div class="agregar-container">
+        <h2>Clientes de Almuerzos</h2>
+        <a class="agregar" href="{{ route('clientesalmuerzos.create') }}">Agregar Orden</a>
+    </div>
+    @if (session('success'))
         <div class="mensaje-exito">
             <p>{{ session('success') }}</p>
         </div>
-    
     @endif
-    
+
     <table>
         <thead>
             <tr>

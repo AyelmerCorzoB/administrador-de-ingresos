@@ -14,6 +14,8 @@
   --color-error: #dc3545;
   --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
   --transicion: all 0.3s ease;
+  --color-verde: rgb(134, 224, 134);
+  --color-rojo:rgb(224, 134, 134);
 }
 
 /* ========================== */
@@ -40,8 +42,9 @@ header {
   color: var(--color-blanco);
   padding: 1rem;
   box-shadow: var(--sombra);
-  position: relative;
+  position: -webkit-sticky;
   z-index: 10;
+
 }
 
 .header-content {
@@ -96,8 +99,9 @@ nav a.active {
 /* ========================== */
 main {
   max-width: 1200px;
+  max-height: 800px;
   margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 main::before {
@@ -118,6 +122,11 @@ main::before {
   animation: lavaAnimation 6s ease-in-out infinite, gradientAnimation 10s linear infinite;
 }
 
+.main-content {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap; 
+}
 /* ========================== */
 /* ANIMACIONES */
 /* ========================== */
@@ -151,6 +160,11 @@ main::before {
       background-position: 0% 50%;
   }
 }
+h2 {
+  color: var(--color-titulos);
+  margin-bottom: 1rem;
+  text-align: center;
+}
 
 /* ========================== */
 /* BOTONES */
@@ -163,7 +177,38 @@ main::before {
   width: 70%;
   margin: 2rem auto;
 }
+.agregar-container {
+  display: flex;
+  gap: 1rem;
+  align-content: center;
+  justify-content: space-between;
+  width: 100%;
+}
 
+/* Estilos del botón */
+.agregar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: max-content;
+  text-decoration: none;
+  color: var(--color-blanco);
+  background-color: var(--color-primario);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transicion);
+  box-shadow: var(--sombra);
+  margin-bottom: 1.2rem;
+}
+
+.agregar:hover {
+  background-color: var(--color-claro);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
 button {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -225,24 +270,85 @@ input:focus, select:focus {
 /* ========================== */
 table {
   width: 100%;
+  margin: 0 auto;
   border-collapse: collapse;
-  margin-top: 1rem;
+  border-spacing: 0;
   border: 1px solid var(--color-primario);
 }
 
 th, td {
-  padding: 0.75rem;
+  padding: 0.5rem;
   text-align: left;
 }
 
 th {
   background-color: var(--color-primario);
   color: var(--color-blanco);
+  
 }
 
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
 tr:nth-child(even) {
   background-color: var(--color-secundario);
 }
+.content-left,
+.content-right {
+  flex: 1 1 45%;
+  min-width: 300px;
+  background-color: var(--color-blanco);
+  border-radius: 8px;
+  box-shadow: var(--sombra);
+  padding: 1.5rem;
+  height: 400px; /* Altura fija */
+  display: flex;
+  flex-direction: column;
+}
+
+.content-left {
+  order: 1;
+}
+
+.content-right {
+  order: 2;
+}
+
+.table-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Evita el scroll aquí */
+}
+
+.table-body-container {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.content-left tr {
+  background-color: var(--color-verde);
+  font-weight: bold;
+  color: var(--color-negro);
+}
+
+.content-right tr {
+  background-color: var(--color-rojo);
+  font-weight: bold;
+  color: var(--color-negro);
+}
+.content-left table{
+  border: 1px solid var(--color-primario);
+  border-radius: 10px;
+}
+/* Asegurarse de que las columnas se alineen correctamente */
+.table-container > table,
+.table-body-container > table {
+  table-layout: fixed;
+}
+
 
 /* ========================== */
 /* MENSAJES */
@@ -274,6 +380,60 @@ footer {
   justify-content: center;
   width: 100%;
   padding: 10px 0;
+}
+
+/*=========================== */
+/*    Seccion de editar       */
+/*=========================== */
+.text-center {
+  text-align: center;
+  color: #333;
+}
+
+.form-orden {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #218838;
 }
 
 /* ========================== */
@@ -344,6 +504,9 @@ footer {
     display: flex;
     width: 100%;
     flex-direction: column;
+  }
+  button{
+    font-size: small;
   }
 }
 

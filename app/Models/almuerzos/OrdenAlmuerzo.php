@@ -8,13 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class OrdenAlmuerzo extends Model
 {
     use HasFactory;
-
-    protected $table = 'ordenes'; // Nombre de la tabla
-    protected $primaryKey = 'id_orden'; // Clave primaria
-    public $timestamps = false; // Desactiva las marcas de tiempo automáticas
-
+    protected $table = 'ordenes';
+    protected $primaryKey = 'id_orden';
+    public $timestamps = false;
     protected $fillable = ['id_cliente', 'detalle', 'total', 'ubicacion', 'fecha_orden', 'situacion_pago'];
-
     public function clienteAlmuerzo()
     {
         return $this->belongsTo(ClienteAlmuerzo::class, 'id_cliente');

@@ -3,10 +3,12 @@
 @section('title', 'Órdenes de Almuerzos')
 
 @section('content')
-    <h2>Órdenes de Almuerzos</h2>
-    <a href="{{ route('ordenesalmuerzos.orden_create') }}">Agregar Orden</a>
-
-    @if(session('success'))
+    
+    <div class="agregar-container">
+        <h2>Órdenes</h2>
+        <a class="agregar" href="{{ route('ordenesalmuerzos.orden_create') }}">Agregar Orden</a>
+    </div>
+    @if (session('success'))
         <div>
             {{ session('success') }}
         </div>
@@ -23,14 +25,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($ordenesAlmuerzos as $ordenAlmuerzo)
+            @foreach ($ordenesAlmuerzos as $orden)
                 <tr>
-                    <td>{{ $ordenAlmuerzo->clienteAlmuerzo->nombre }}</td>
-                    <td>{{ $ordenAlmuerzo->detalle }}</td>
-                    <td>{{ $ordenAlmuerzo->total }}</td>
-                    <td>{{ $ordenAlmuerzo->ubicacion }}</td>
-                    <td>
-                        <form method="POST" action="{{ route('ordenesalmuerzos.destroy', $ordenAlmuerzo->id_orden) }}">
+                    <td>{{ $orden->clienteAlmuerzo->nombre }}</td>
+                    <td>{{ $orden->detalle }}</td>
+                    <td>{{ $orden->total }}</td>
+                    <td>{{ $orden->ubicacion }}</td>
+                    <td class="acciones">
+                        <form method="GET" action="{{ route('ordenesalmuerzos.orden_edit', $orden->id_orden) }}">
+                            <button type="submit">Editar</button>
+                        </form>
+                        
+                        <form method="POST" action="{{ route('ordenesalmuerzos.destroy', $orden->id_orden) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Eliminar</button>
