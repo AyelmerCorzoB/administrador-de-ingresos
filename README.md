@@ -8,8 +8,12 @@
 
 ## Autor
 #### AyelmerCorzoB
+<center> 
+<img src="resources/images/foto.png" alt="Descripción de la imagen" width="150" height="150">
+</center>
 
-![Icono de Autor](https://via.placeholder.com/30)
+
+
 
 ## Fecha
 21/12/2024
