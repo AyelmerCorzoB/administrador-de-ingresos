@@ -1,3 +1,4 @@
+
 <section class="botones">
     <div class="button-wrapper">
         <button onclick="location.href='{{ route('ordenesalmuerzos.orden') }}'" aria-label="Ver diario">
@@ -6,8 +7,7 @@
         </button>
     </div>
     <div class="button-wrapper">
-        <button onclick="location.href='{{ route('clientesalmuerzos.clientes') }}'"
-            aria-label="Agregar nuevo cliente">
+        <button onclick="location.href='{{ route('clientesalmuerzos.clientes') }}'" aria-label="Agregar nuevo cliente">
             <i class="fa-solid fa-user" aria-hidden="true"></i>
             Clientes
         </button>
@@ -19,10 +19,9 @@
         </button>
     </div>
     <div class="button-wrapper">
-        <button  aria-label="Ver Total">
+        <button onclick="location.href='{{ route('pagosalmuerzos.pagos')}}'" aria-label="Ver Total">
             <i class="fa-solid fa-eye" aria-hidden="true"></i>
             Ver total
         </button>
     </div>
-
 </section>

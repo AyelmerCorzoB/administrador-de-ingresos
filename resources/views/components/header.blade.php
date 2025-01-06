@@ -11,8 +11,7 @@
 
         <nav>
             <ul>
-                <li><a href="{{ route('clientesalmuerzos.index') }}" class="{{ request()->routeIs('clientesalmuerzos.index') ? 'active' : '' }}">Almuerzos</a></li>
-                <li><a href="{{ route('ordenesalmuerzos.orden_create') }}" class="{{ request()->routeIs('ordenesalmuerzos.orden_create') ? 'active' : '' }}">Órdenes</a></li>
+                <li><a href="{{ route('clientesalmuerzos.index') }}" class="{{ request()->routeIs('clientesalmuerzos.index') ? 'active' : '' }}">Inicio</a></li>
             </ul>
         </nav>
     </div>

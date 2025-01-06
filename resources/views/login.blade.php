@@ -14,8 +14,21 @@
         <div class="olas"></div>
         <div class="olas"></div>
     </div>
+    
+    <div class="container-form-login">
+    @if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    @if($errors->any())
+    <div class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+    @endif
     <form action="{{ url('/login') }}" method="POST">
-        <img src="storage/images/logo.png" alt="">
+        <h2 style="color: white; font-weight: bold; font-size: 1.8rem;">Inicia Sesion</h2>
+        <br>
         @csrf
         <div class="input-container">
             <input type="text" name="nombre" placeholder="Usuario" required>
@@ -27,16 +40,10 @@
         </div>
         <input name="enviar" type="submit" class="btn" value="Entrar">
     </form>
-    @if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @if($errors->any())
-    <div class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
     </div>
-    @endif
+    
+    
+
+    
 </body>
 </html>

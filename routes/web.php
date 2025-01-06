@@ -5,10 +5,11 @@ use App\Http\Controllers\PanelController;
 use App\Http\Controllers\OrdenAlmuerzoController;
 use App\Http\Controllers\ClienteAlmuerzoController;
 use App\Http\Controllers\MensualAlmuerzoController;
+use App\Http\Controllers\PagosAlmuerzosController;
 
 // Rutas para autenticación
 Route::get('/', function () {
-    return view('login'); // Vista login
+    return view('login');
 })->name('login');
 
 Route::get('/register', function () {
@@ -48,3 +49,6 @@ Route::delete('/ordenesalmuerzos/{id}', [OrdenAlmuerzoController::class, 'destro
 Route::get('ordenesalmuerzos/{id_orden}/edit', [OrdenAlmuerzoController::class, 'edit'])->name('ordenesalmuerzos.orden_edit');
 Route::put('ordenesalmuerzos/{id_orden}', [OrdenAlmuerzoController::class, 'update'])->name('ordenesalmuerzos.update');
 Route::put('/ordenesalmuerzos/{id_orden}/update-status', [OrdenAlmuerzoController::class, 'updateStatus'])->name('ordenesalmuerzos.updateStatus');
+
+// Rutas para Pagos de Almuerzos
+Route::get('/pagosalmuerzos', [PagosAlmuerzosController::class, 'pagos'])->name('pagosalmuerzos.pagos');

@@ -17,3 +17,4 @@ class ClienteAlmuerzo extends Model
         return $this->hasMany(OrdenAlmuerzo::class, 'id_cliente');
     }
 }
+

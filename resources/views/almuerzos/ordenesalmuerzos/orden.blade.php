@@ -27,7 +27,7 @@
         <tbody>
             @foreach ($ordenesAlmuerzos as $orden)
                 <tr>
-                    <td>{{ $orden->clienteAlmuerzo->nombre }}</td>
+                    <td>{{ $orden->clienteAlmuerzo->nombre ?? 'Cliente no encontrado' }}</td>
                     <td>{{ $orden->detalle }}</td>
                     <td>{{ $orden->total }}</td>
                     <td>{{ $orden->ubicacion }}</td>

@@ -13,7 +13,9 @@ class OrdenAlmuerzo extends Model
     public $timestamps = false;
     protected $fillable = ['id_cliente', 'detalle', 'total', 'ubicacion', 'fecha_orden', 'situacion_pago'];
     public function clienteAlmuerzo()
-    {
-        return $this->belongsTo(ClienteAlmuerzo::class, 'id_cliente');
-    }
+{
+    return $this->belongsTo(ClienteAlmuerzo::class, 'id_cliente', 'id_cliente')->withDefault([
+        'nombre' => 'Cliente eliminado o no disponible',
+    ]);
+}
 }

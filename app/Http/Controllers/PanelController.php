@@ -41,8 +41,8 @@ class PanelController
 
     public function pagos()
     {
-        $pagos = Pago::with('cliente')->get();
-        return view('panel.pagos', compact('pagos'));
+        $pagos = Pago::with('cliente')->get(); // Esto trae los pagos con su cliente relacionado
+        return view('panel.pagos', compact('pagos')); // Envía los datos a la vista
     }
 
     public function transacciones()
