@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-12-2024 a las 04:24:51
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 06-01-2025 a las 16:07:58
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `telefono` int(20) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -40,8 +40,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nombre`, `telefono`, `created_at`, `updated_at`) VALUES
-(54, 'alan', 1234567890, '2024-12-29 00:06:40', '2024-12-29 00:06:40'),
-(55, 'Elidallana', 1234567890, '2024-12-29 00:12:21', '2024-12-29 00:12:21');
+(56, 'Jorge', '3214511398', '2025-01-05 17:39:11', '2025-01-05 17:39:11'),
+(57, 'Candida', '3223708296', '2025-01-05 17:39:44', '2025-01-05 17:39:44');
 
 -- --------------------------------------------------------
 
@@ -102,6 +102,27 @@ CREATE TABLE `ordenes` (
   `situacion_pago` enum('pendiente','pagado') NOT NULL DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `ordenes`
+--
+
+INSERT INTO `ordenes` (`id_orden`, `id_cliente`, `detalle`, `ubicacion`, `total`, `fecha_orden`, `situacion_pago`) VALUES
+(3, 56, 'Sin arroz', 'Pui', 12000.00, '2025-01-05', 'pagado');
+
+--
+-- Disparadores `ordenes`
+--
+DELIMITER $$
+CREATE TRIGGER `after_insert_orden` AFTER INSERT ON `ordenes` FOR EACH ROW BEGIN
+    -- Verifica si la situación de pago es 'pagado'
+    IF NEW.situacion_pago = 'pagado' THEN
+        INSERT INTO pagos (id_cliente, monto, fecha_pago)
+        VALUES (NEW.id_cliente, NEW.total, NOW()); 
+    END IF;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -114,6 +135,13 @@ CREATE TABLE `pagos` (
   `monto` decimal(10,2) NOT NULL,
   `fecha_pago` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pagos`
+--
+
+INSERT INTO `pagos` (`id_pago`, `id_cliente`, `monto`, `fecha_pago`) VALUES
+(1, 56, 12000.00, '2025-01-05');
 
 -- --------------------------------------------------------
 
@@ -174,7 +202,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('nocTCaaTjtOYc2vJ7qbEgoO7ef0Da99C4yvDf6It', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoic1F1RE9rbFpsN29idlhzSWtzdldaWjNoaE1zY3BlNWFyOEtZQkpFUCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jbGllbnRlc2FsbXVlcnpvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6Njoibm9tYnJlIjtzOjU6InRlc3QxIjtzOjM6InJvbCI7czo1OiJhZG1pbiI7fQ==', 1735431141);
+('o5rhJXs5KoMhGRjqFDFctHi4l0meY4QreuSqVU69', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiNlQ0V1F1ZE4zY1RTOTkzNGtvS01peGQzTkdva2tPd05CbE9BcTZVRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYWdvc2FsbXVlcnpvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6Njoibm9tYnJlIjtzOjQ6ImRheWEiO3M6Mzoicm9sIjtzOjk6ImFsbXVlcnpvcyI7fQ==', 1736123493);
 
 -- --------------------------------------------------------
 
@@ -211,8 +239,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `password`, `rol`, `fecha`, `created_at`, `updated_at`) VALUES
-(1, 'test', '123', 'admin', '0000-00-00', NULL, NULL),
-(2, 'test1', '$2y$12$8UA4H.TRv05LN/CTF1gJ5OdFBpf5VBpBMDQtAOYOtndwO8VQKZ6Iu', 'admin', '2024-12-28', '2024-12-29 01:51:19', '2024-12-29 01:51:19');
+(6, 'admin', '$2y$12$92VQ8HySv8ZhiPFU29vF1uTROJvLAucAXhR0HwShzVRvyFKTcB1/S', 'admin', '2025-01-05', '2025-01-06 03:50:22', '2025-01-06 03:50:22'),
+(7, 'daya', '$2y$12$eEbrs1byHg8R201094aEIu1n1ACa599jy8OwvlvSmgFuRw2WiNAiy', 'almuerzos', '2025-01-05', '2025-01-06 04:26:42', '2025-01-06 04:26:42');
 
 --
 -- Índices para tablas volcadas
@@ -307,7 +335,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -319,13 +347,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `ordenes`
 --
 ALTER TABLE `ordenes`
-  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permissions`
@@ -343,13 +371,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `transacciones`
 --
 ALTER TABLE `transacciones`
-  MODIFY `id_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_transaccion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
@@ -377,7 +405,7 @@ ALTER TABLE `ordenes`
 -- Filtros para la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  ADD CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_PagosClientes` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
 
 --
 -- Filtros para la tabla `role_has_permissions`
